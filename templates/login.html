@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>请登录</h4>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ url_for('login') }}" class="form-horizontal" method="post">
+                        <div class="input-group" style="margin-top: 10px; margin-bottom: 10px">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <input type="text" name="username" id="username" placeholder="请输入账号" class="form-control">
+                        </div>
+                        <div class="input-group" style="margin-top: 10px; margin-bottom: 10px">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                            <input type="password" name="passwd" id="passwd" placeholder="请输入密码" class="form-control">
+                        </div>
+                        {% with messages = get_flashed_messages()  %}
+                            {% if messages %}
+                                {% for msg in messages %}
+                                    <div class="alert alert-warning">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        {{ msg }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <div class="col-lg-offset-2" style="margin-top: 10px; margin-bottom: 10px">
+                            <input type="submit" class="btn btn-default" value="登&nbsp;录">
+                            <a href="#" class="btn btn-link pull-right">忘记密码</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
