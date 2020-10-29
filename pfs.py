@@ -4,6 +4,7 @@ import sqlite3
 from datetime import datetime, timedelta
 import os
 from account.views import RegUser, UserLogin, MyRegUser
+from article.views import article
 
 
 app = Flask(__name__)
@@ -11,6 +12,9 @@ app.secret_key = '*^%&$&^%&*()&*^%'
 DATABASE_URL = r'.\db\feedback.db'
 UPLOAD_FOLDER = r'.\uploads'
 ALLOWED_EXTENSIONS = ['.jpg', '.png', '.gif']
+
+
+app.register_blueprint(article, url_prefix='/articles')
 
 
 # 呈现特定目录下的资源
@@ -222,7 +226,7 @@ def remove_cookie():
 # 为导入的基于类的视图添加分配URL规则
 app.add_url_rule('/reg/', view_func=RegUser.as_view('reg_user'))
 
-app.add_url_rule('/register', view_func=MyRegUser.as_view('register_user'))
+app.add_url_rule('/register/', view_func=MyRegUser.as_view('register_user'))
 
 
 if __name__ == '__main__':
